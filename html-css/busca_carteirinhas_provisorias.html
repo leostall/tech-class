@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+
+<html style="font-size: 16px;" lang="pt"><head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+
+  <title>Busca carteirinhas provisórias</title>
+  <link rel="website icon" type="png" href="images/logo_icon_noBg.png">
+
+  <link rel="stylesheet" href="nicepage.css" media="screen">
+  <link rel="stylesheet" href="index.css" media="screen">
+  <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+  <meta name="generator" content="Nicepage 5.12.7, nicepage.com">
+  <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+  <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+    
+    
+  <script type="application/ld+json">{
+	"@context": "http://schema.org",
+	"@type": "Organization",
+	"name": ""}</script>
+
+  <meta name="theme-color" content="#478ac9">
+  <meta property="og:title" content="Página Inicial">
+  <meta property="og:type" content="website">
+  <meta data-intl-tel-input-cdn-path="intlTelInput/">
+
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    tr:hover {
+      background-color: #f5f5f5;
+    }
+    .data-diferente {
+      color: red;
+    }
+
+    .switch-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 20px;
+      background-color: gray;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-right: 30px; 
+    }
+
+    .slider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      background-color: white;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+
+    #autoupdate:checked + .switch .slider {
+      transform: translateX(20px);
+    }
+
+    #autoupdate:checked + .switch {
+      background-color: green;
+    }
+    .hadtable {
+      background-color: rgb(135, 162, 160);
+    }
+</style>
+
+</head>
+  <body class="u-body u-xl-mode" data-lang="pt">
+  
+  <section class="u-align-center u-clearfix u-section-1" id="carousel_2955">
+
+    <p></p>
+    <h2 class="u-align-center-lg u-align-center-md u-align-center-sm u-align-center-xs u-custom-font u-font-montserrat u-text u-text-default u-text-1">Lista de carteirinhas provisórias</h3>
+    <h5 class="u-border-none u-button-style u-palette-2-base u-btn-1">Busca contabilizada em <time id="data-abertura"></time> às <time id="horario-abertura"></time></h4>
+  </section>
+  
+  <table>
+    <thead>
+        <tr class="hadtable">
+        <th>MATRÍCULA</th>
+        <th>NOME</th>
+        <th>TURMA</th>
+        <th>TIPO</th>
+        <th>CÓDIGO TAG</th>
+        <th>VALIDADE</th>
+      </tr>
+    </thead>
+
+    <tbody id="alunos-body"></tbody>
+
+  </table>
+  <section class="u-align-center u-clearfix u-section-1" id="carousel_2955">
+  <label class="u-align-center u-small-text u-text u-text-variant u-text-1 switch-container" for="autoupdate">
+    <span>Atualização Automática   </span>
+    <input type="checkbox" id="autoupdate" style="display: none;">
+    <label class="switch" for="autoupdate">
+        <div class="slider"></div>
+    </label>
+  </label>
+</section>
+
+  <script>
+    const autoupdateSwitch = document.getElementById('autoupdate');
+    
+    autoupdateSwitch.addEventListener('change', function() {
+      if (autoupdateSwitch.checked) {
+        startAutoUpdate();
+      } else {
+        stopAutoUpdate();
+      }
+    });
+    
+    let intervalId;
+    
+    function startAutoUpdate() {
+      intervalId = setInterval(updateTable, 2000); // Atualiza a cada 2 segundos
+      updateTable();
+    }
+    
+    function stopAutoUpdate() {
+      clearInterval(intervalId);
+    }
+    
+    function updateTable() {
+      getAlunosPresentes();
+      atualizarHorarioAbertura();
+    }
+
+    function getAlunosPresentes() {
+      fetch('http://localhost/busca_carteirinhas_provisorias.php')
+        .then(response => response.json())
+        .then(alunos => {
+          const alunosBody = document.getElementById('alunos-body');
+          alunosBody.innerHTML = '';
+
+          alunos.forEach(aluno => {
+            const row = document.createElement('tr');
+            const idCell = document.createElement('td');
+            const nomeCell = document.createElement('td');
+            const turmaCell = document.createElement('td');
+            const tipoCell = document.createElement('td');
+            const codCell = document.createElement('td');
+            const validadeCell = document.createElement('td');
+
+            idCell.textContent = aluno.id;
+            nomeCell.textContent = aluno.nome;
+            turmaCell.textContent = aluno.turma;
+            tipoCell.textContent = aluno.tipo;
+            codCell.textContent = aluno.cod;
+            validadeCell.textContent = aluno.validade;
+
+            var dataEntrada = new Date(aluno.time);
+            var dataAtual = new Date();
+
+            row.appendChild(idCell);
+            row.appendChild(nomeCell);
+            row.appendChild(turmaCell);
+            row.appendChild(tipoCell);
+            row.appendChild(codCell);
+            row.appendChild(validadeCell);
+
+            alunosBody.appendChild(row);
+          });
+        })
+      .catch(error => {
+        console.error('Erro ao obter alunos presentes:', error);
+      });
+    }
+
+    function formatarHorario(hora, minutos, segundos) {
+      hora = hora.toString().padStart(2, '0');
+      minutos = minutos.toString().padStart(2, '0');
+      segundos = segundos.toString().padStart(2, '0');
+      return hora + ':' + minutos + ':' + segundos;
+    }
+
+    function atualizarHorarioAbertura() {
+      var dataAtual = new Date();
+      var hora = dataAtual.getHours();
+      var minutos = dataAtual.getMinutes();
+      var segundos = dataAtual.getSeconds();
+      var horarioFormatado = formatarHorario(hora, minutos, segundos);
+      document.getElementById("horario-abertura").textContent = horarioFormatado;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      getAlunosPresentes();
+      atualizarHorarioAbertura();
+    });
+
+    function formatarData(data) {
+      var dia = data.getDate().toString().padStart(2, '0');
+      var mes = (data.getMonth() + 1).toString().padStart(2, '0');
+      var ano = data.getFullYear();
+      return dia + '/' + mes + '/' + ano;
+    }
+
+    function atualizarDataAbertura() {
+      var dataAtual = new Date();
+      var dataFormatada = formatarData(dataAtual);
+      document.getElementById("data-abertura").textContent = dataFormatada;
+    }
+
+    window.addEventListener('DOMContentLoaded', atualizarDataAbertura);
+
+    </script>
+
+<footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-11a1"><div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-sheet-1">
+    <p class="u-align-center u-small-text u-text u-text-variant u-text-1"> Este site é propriedade exclusiva dos membros da Tech Class</p>
+</div></footer>
+  
+  </body>
+</html>
