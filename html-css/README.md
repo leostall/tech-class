@@ -1,4 +1,4 @@
-# Tech Class Project - HTML & CSS Files
+# Tech Class - Classroom Automation and Attendance Control System
 
 ## 📜 Overview
 
