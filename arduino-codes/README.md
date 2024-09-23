@@ -1,4 +1,4 @@
-# Arduino Source Codes
+# Tech Class - Classroom Automation and Attendance Control System
 
 ## 📜 Versioned Source Codes
 
