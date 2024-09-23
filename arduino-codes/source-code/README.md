@@ -1,4 +1,4 @@
-# Source Code for Tech Class Project
+# Tech Class - Classroom Automation and Attendance Control System
 
 ## 📜 Overview
 
