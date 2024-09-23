@@ -1,4 +1,4 @@
-# Tech Class Project - PHP Codes
+# Tech Class - Classroom Automation and Attendance Control System
 
 ## 📜 Overview
 
