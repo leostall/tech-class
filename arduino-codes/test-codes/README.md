@@ -1,4 +1,4 @@
-# Test Codes for Tech Class Project
+# Tech Class - Classroom Automation and Attendance Control System
 
 ## 📜 Overview
 
