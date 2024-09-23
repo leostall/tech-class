@@ -15,7 +15,7 @@ This repository contains the source code for the **Tech Class** project, which f
 The code provided here is versioned, and while efforts have been made to ensure its accuracy, some versions may contain errors. Subsequent versions may include fixes and improvements.
 
 ### Final Project Code
-The final version of the project is titled `CodFonte_Ethernet_RFID_Rele_DHT11_0.12`.
+The final version of the project is titled `CodFonte_Ethernet_RFID_Rele_DHT11_IR_0.1`.
 
 ## ⚠️ Plagiarism Warning
 
