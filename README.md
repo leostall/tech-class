@@ -1,10 +1,10 @@
-# Tec Class - Classroom Automation and Attendance Control System
+# Tech Class - Classroom Automation and Attendance Control System
 
 ## 📘 Introduction
-**Tec Class** is a project focused on automating student attendance and managing classroom equipment to improve the efficiency of the learning environment. By implementing **RFID technology**, the system records student presence, eliminating the time spent on manual attendance and enhancing classroom management.
+**Tech Class** is a project focused on automating student attendance and managing classroom equipment to improve the efficiency of the learning environment. By implementing **RFID technology**, the system records student presence, eliminating the time spent on manual attendance and enhancing classroom management.
 
 ## 🎯 Objective
-The primary goal of **Tec Class** is to **optimize classroom time** by automating attendance and controlling various classroom devices, such as lights, projectors, and fans, based on real-time data.
+The primary goal of **Tech Class** is to **optimize classroom time** by automating attendance and controlling various classroom devices, such as lights, projectors, and fans, based on real-time data.
 
 ## ⚙️ Features
 - **Automated Attendance**: Uses RFID tags to record student and teacher presence, updating in real-time.
@@ -31,7 +31,7 @@ To run the project locally, follow these steps:
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/leostall/tec-class.git
+    git clone https://github.com/leostall/tech-class.git
     ```
 
 2. **Install dependencies**:
